@@ -1,0 +1,29 @@
+MOV 30H,#11H 
+MOV 31H,#51H 
+MOV 32H,#61H 
+MOV 33H,#13H 
+MOV 34H,#15H 
+MOV 35H,#24H 
+MOV R0,#20H
+MOV R1,#30H
+MOV R2,#08H
+MOV B,34H
+JMP MUL16
+NEXT: MOV B,35H
+      MOV R0,#21H
+      MOV R1,#30H
+	  JMP MUL16 
+MUL16: MOV A,@R1
+	   MUL AB
+       MOV @R0,A
+       MOV A,B
+       INC R0
+       ADDC A,@R0
+       MOV @R0,A
+       INC R1
+       DEC R2
+       MOV A,R2
+       SUBB A,#4H
+       JZ NEXT
+       ADD A,#4H
+       JNZ MUL16
